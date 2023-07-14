@@ -54,6 +54,10 @@ dependencies {
 
 	// spring-security test
 	testImplementation 'org.springframework.security:spring-security-test:5.7.3'
+
+	// Thymeleaf에서 spring security의 문법이나 형식을 지원하는 확장팩 라이브러리
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 }
 
 tasks.named('test') {
