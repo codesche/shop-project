@@ -24,8 +24,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne                           // 회원 엔터티와 일대일 매핑
-    @JoinColumn(name="member_id")       // 매핑할 외래키 지정
+    @OneToOne                               // 회원 엔터티와 일대일 매핑
+    @JoinColumn(name = "member_id")         // 매핑할 외래키 지정
     private Member member;
 
 }
