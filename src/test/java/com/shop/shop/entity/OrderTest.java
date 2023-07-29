@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.shop.shop.constant.ItemSellStatus;
 import com.shop.shop.repository.ItemRepository;
 import com.shop.shop.repository.MemberRepository;
+import com.shop.shop.repository.OrderItemRepository;
 import com.shop.shop.repository.OrderRepository;
 import java.time.LocalDateTime;
 import javax.persistence.EntityManager;
@@ -30,6 +31,9 @@ class OrderTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     @PersistenceContext
     EntityManager em;
@@ -110,4 +114,35 @@ class OrderTest {
         em.flush();
     }
 
+    @Test
+    @DisplayName("지연 로딩 테스트")
+    public void lazyLoadingTest() {
+        Order order = this.createOrder();
+        Long orderItemId = order.getOrderItems().get(0).getId();
+        em.flush();
+        em.clear();
+
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+            .orElseThrow(EntityNotFoundException::new);
+        System.out.println("Order class : " +
+                        orderItem.getOrder().getClass());
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
